@@ -1,0 +1,11 @@
+.ruff_cache/
+.idea/
+logs/
+venv/
+__pycache__
+
+*.wav
+*.mp3
+*.iml
+
+.env
