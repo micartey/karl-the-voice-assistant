@@ -53,6 +53,14 @@ Using a local whisper instance doesn't really work on a Raspberry Pi and takes t
 A second possibility is to use pocketsphinx - This seems to work on a Raspberry Pi, **however**, it is very limited and inaccuarte.
 Both not good traits for a wake word detection
 
+### TODO
+
+The rough functionallity is already implemented and you can have continues conversations. 
+However, there are still some things to do!  
+
+- [ ] Function calling (Useful for smart home solutions)
+- [ ] Alarm clock
+
 ## 🚀 Getting Started
 
 Firstly, clone the repository by executing the following command. This command also takes care of navigating into the repository and deleting the git folder.
