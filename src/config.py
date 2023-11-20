@@ -11,6 +11,8 @@ OPENAI_API_TOKEN = os.getenv("OPENAI_API_TOKEN")
 WAKE_WORD = os.getenv("WAKE_WORD")
 ROLE = os.getenv("ROLE")
 
+AMBIENT_NOISE_LEVEL = os.getenv("AMBIENT_NOISE_LEVEL")
+
 logger.add(
     sys.stdout, format="{time} {level} {message}", filter="my_module", level="INFO"
 )

@@ -4,7 +4,7 @@ import whisper
 from loguru import logger
 
 from src.audio.record import AudioRecorder
-from src.config import WAKE_WORD
+from src.config import WAKE_WORD, AMBIENT_NOISE_LEVEL
 
 
 # def listen_for_wake_word() -> bool:
@@ -33,7 +33,9 @@ def listen_for_wake_word() -> None:
     model = whisper.load_model("base")
 
     while True:
-        recorder = AudioRecorder(min_duration=3, silence_duration=1)
+        recorder = AudioRecorder(
+            min_duration=3, silence_duration=1, silence_threshold=AMBIENT_NOISE_LEVEL
+        )
 
         stream_file = tempfile.NamedTemporaryFile(mode="w+", suffix=".wav", delete=True)
         recorder.start_recording()

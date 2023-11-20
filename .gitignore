@@ -4,7 +4,6 @@ logs/
 venv/
 __pycache__
 
-*.wav
 *.mp3
 *.iml
 

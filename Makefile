@@ -1,13 +1,11 @@
 # Makefile
 SHELL := /bin/bash
 
-# Definieren des Standardzieles
-all: requirements
+all: start
 
-# Regel zum Erstellen der requirements.txt
 requirements:
 	@echo "Generate requirements.txt"
-	@source venv/bin/activate; pip freeze > requirements.txt
+	@source venv/bin/activate; ./generate_requirements.sh
 
 install:
 	@echo "Setup virtual environment"
@@ -19,7 +17,7 @@ setup: install
 	@cp assets/templates/.env.template .env
 
 start:
-	@echo "Start voice assistant"
+	@echo "Starting voice assistant"
 	@source venv/bin/activate; python -m src.main
 
 clean:
