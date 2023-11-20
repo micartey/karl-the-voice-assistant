@@ -53,5 +53,4 @@ def main():
 
 
 if __name__ == "__main__":
-    # main()
-    play_mp3("assets/sounds/response.mp3")
+    main()
