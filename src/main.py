@@ -53,4 +53,9 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()  # Main loop
+
+    # Terminate
+    except KeyboardInterrupt:
+        logger.warning("Interupting...")

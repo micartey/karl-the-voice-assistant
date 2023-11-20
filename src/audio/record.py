@@ -1,9 +1,14 @@
 import audioop
 import time
 import wave
-
+import sounddevice
 import pyaudio
+
 from loguru import logger
+
+# This line serves no purpose except to hide the ALSA errors. Don't ask me why this works
+# https://github.com/Uberi/speech_recognition/issues/182#issuecomment-1426939447
+_ = sounddevice.default
 
 
 class AudioRecorder:
