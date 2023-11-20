@@ -28,36 +28,40 @@
   <a href="https://github.com/micartey/karl-the-voice-assistant/issues">Troubleshooting</a>
 </p>
 
+<div align="center">
+    <p style="color: #e84b66"><b>Insufficient performance on a Raspberry Pi</b></p>
+</div>
 
 ## 📚 Introduction
 
 
 This project is a simple voice assistant that watches for a wake word, plays a sound once the wake word has been recognized and listens for audio input.
 The aim of this voice assistant is, to have a voice assistant with the power of OpenAI's GPT and continouse conversations.
-The wake word detection is done on the client side and not processed by any cloud provider.
+The wake word detection is done on the client side and not processed by any cloud provider as per [concept](CONCEPT.md).
 
 ### Motivation
 
 I coded this voice assistant, to tackle two goals: 
 
-1. Refactor an old and broken Apple HomePod 1 and build my own smart home / voice assistant.
+1. Refactor an old and broken Apple HomePod 1 and build my own voice assistant.
 2. Get to know Python development as I am mostly sticking to Java
-3. Use AI in a useful manner
+3. Use AI in an useful manner
 
 ### Hardships
 
 The wake word detection is the hardest issue to solve. 
 It still is not perfect and uses a local whisper instance to check for the wake word.
-Using a local whisper instance doesn't really work on a Raspberry Pi and takes tens of seconds to decode.
+**Using a local whisper instance doesn't really work on a Raspberry Pi and takes tens of seconds to decode** but also provides the best results...
 
-A second possibility is to use pocketsphinx - This seems to work on a Raspberry Pi, **however**, it is very limited and inaccuarte.
-Both not good traits for a wake word detection
+A second possibility is to use pocketsphinx - This seems to work on a Raspberry Pi, **however**, it is very limited and inaccuarte and also slow.
+Not good traits for a wake word detection.
 
 ### TODO
 
 The rough functionallity is already implemented and you can have continues conversations. 
 However, there are still some things to do!  
 
+- [ ] Fix the wake word performance bottle neck to be able to run it on a Raspberry Pi 4 
 - [ ] Function calling (Useful for smart home solutions)
 - [ ] Alarm clock
 
