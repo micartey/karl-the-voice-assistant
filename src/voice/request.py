@@ -2,7 +2,7 @@ from src.audio.record import AudioRecorder
 from src.config import AMBIENT_NOISE_LEVEL
 
 
-def record_audio_sample(file: str):
+def record_audio_sample(file: str) -> None:
     """
     Record audio file until it is silent for a moment
     :param file: wav file

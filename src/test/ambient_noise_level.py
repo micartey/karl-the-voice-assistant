@@ -3,7 +3,7 @@ import audioop
 import pyaudio
 
 
-def main():
+def main() -> None:
     chunk_size = 4096
 
     audio = pyaudio.PyAudio()

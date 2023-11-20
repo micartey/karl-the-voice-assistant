@@ -1,10 +1,10 @@
-import pyaudio
 import wave
-import pygame
-import time
+
+import pyaudio
+from playsound import playsound
 
 
-def play_wav(filename):
+def play_wav(filename: str) -> None:
     # Open the WAV file
     wf = wave.open(filename, "rb")
 
@@ -34,15 +34,10 @@ def play_wav(filename):
     p.terminate()
 
 
-def play_mp3(filename):
-    pygame.mixer.init()
-
-    # Load the MP3 file
-    pygame.mixer.music.load(filename)
-
-    # Play the MP3 file
-    pygame.mixer.music.play()
-
-    # Wait for the music to play
-    while pygame.mixer.music.get_busy():
-        time.sleep(1)
+def play_mp3(filename: str) -> None:
+    """
+    You might want to install pip install pygobject
+    :param filename: path to the file (with name)
+    :return: sound
+    """
+    playsound(filename)

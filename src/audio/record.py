@@ -23,7 +23,7 @@ class AudioRecorder:
         self.frames = []
         self.last_sound_time = time.time()
 
-    def start_recording(self):
+    def start_recording(self) -> None:
         self.stream = self.audio.open(
             format=self.audio_format,
             channels=self.channels,
@@ -38,7 +38,7 @@ class AudioRecorder:
 
         logger.info("Start recording audio")
 
-    def process_stream(self):
+    def process_stream(self) -> bool:
         data = self.stream.read(self.chunk_size)
         self.frames.append(data)
 
@@ -56,14 +56,14 @@ class AudioRecorder:
 
         return True
 
-    def stop_recording(self):
+    def stop_recording(self) -> None:
         self.stream.stop_stream()
         self.stream.close()
         self.audio.terminate()
 
         logger.info("Stop recording audio")
 
-    def save_recording(self, filename):
+    def save_recording(self, filename) -> None:
         wave_file = wave.open(filename, "wb")
         wave_file.setnchannels(self.channels)
         wave_file.setsampwidth(self.audio.get_sample_size(self.audio_format))

@@ -11,9 +11,7 @@ from src.voice.response import generate_response
 from src.voice.synthesize import text_to_speech
 from src.voice.transcription import transcripe_audio_file
 
-#
 # Read System Role Prompt and Voice Data
-#
 prompt = Prompt.load_from_json(config.ROLE)
 logger.debug(prompt)
 
@@ -33,25 +31,27 @@ def on_signal():
 
     # TODO: Play record finish sound
 
+    # Append request to message history
     messages.append({"role": "user", "content": transcription})
 
     gpt_response = generate_response(messages)
     logger.debug(gpt_response)
 
+    # Append answer to message history
     messages.append({"role": "assistant", "content": gpt_response})
 
     response_file = text_to_speech(gpt_response, voice)
     play_mp3(response_file.name)
 
 
-if __name__ == "__main__":
-    #
-    # Main Loop
-    #
+def main():
+    # Detect wake word, can be configured setting WAKE_WORD environment variable
     while True:
-        #
-        # Detect wake word, can be configured setting WAKE_WORD environment variable
-        #
         listen_for_wake_word()
         logger.info("Signal word detected... Start recording")
         on_signal()
+
+
+if __name__ == "__main__":
+    # main()
+    play_mp3("assets/sounds/response.mp3")
