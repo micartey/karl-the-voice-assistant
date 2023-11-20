@@ -34,7 +34,9 @@ def listen_for_wake_word() -> None:
 
     while True:
         recorder = AudioRecorder(
-            min_duration=3, silence_duration=1, silence_threshold=AMBIENT_NOISE_LEVEL
+            min_duration=3,
+            silence_duration=1,
+            silence_threshold=int(AMBIENT_NOISE_LEVEL),
         )
 
         stream_file = tempfile.NamedTemporaryFile(mode="w+", suffix=".wav", delete=True)
