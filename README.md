@@ -85,6 +85,20 @@ Afterward, you can simply start the voice assistant by executing the following c
 make start
 ```
 
+### Adjust noise level
+
+You might want to adjust the noise level depending on your microphone and ambient noise.
+To do this, you first have to figure out, what rms you have. 
+This can be done, by executing the following command:
+
+```shell
+source venv/bin/activate; python src/test/ambient_noise_level.py
+```
+
+The script will print the current rms which will go up if you talk e.g.
+Figure out what values are displayed when being silent and what values are displayed when talking.
+After you have figured out the value, you can specify it in the `.env` file (default: 20).
+
 ### Roles
 
 You can set a role for your voice assistant. Roles are stored in [assets/prompts](https://github.com/micartey/karl-the-voice-assistant/tree/master/assets/prompts) and can easily be created and implemented.
