@@ -11,12 +11,6 @@
         src="https://img.shields.io/badge/Written%20in-python-%23F2B655?style=for-the-badge"
         height="30"
     />
-    <a href="https://discord.gg/fxTn7v8">
-        <img 
-            src="https://img.shields.io/discord/647922123192533022?color=212121&label=Discord&logo=discord&logoColor=212121&style=for-the-badge"
-            height="30"
-        />
-    </a>
 </div>
 
 <br />
