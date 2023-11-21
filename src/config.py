@@ -29,3 +29,11 @@ AMBIENT_NOISE_LEVEL = os.getenv("AMBIENT_NOISE_LEVEL")
 # Objects
 #
 openai = OpenAI(api_key=OPENAI_API_TOKEN)
+
+abort_prompt = [
+    {
+        "role": "system",
+        "content": "You will be provided with some words or sentences. If the sentences go into "
+        'the direction to abort, stop or to be silent: Return "Y". Else Return "N"',
+    },
+]

@@ -1,4 +1,5 @@
 import tempfile
+import copy
 
 from loguru import logger
 
@@ -32,18 +33,10 @@ def on_signal():
     # TODO: Play record finish sound
 
     # Check for abort - In case of an abort, abort_state will equal "Y" for Yes
-    abort_state = generate_response(
-        [
-            {
-                "role": "system",
-                "content": "You will be provided with some words or sentences. If the sentences go into "
-                'the direction of abort or stop: Return "Y". Else Return "N"',
-            },
-            {"role": "user", "content": transcription},
-        ]
-    )
+    abort_prompt = copy.deepcopy(config.abort_prompt)
+    abort_prompt.append({"role": "user", "content": transcription})
 
-    if abort_state.lower() == "Y".lower():
+    if generate_response(abort_prompt).lower() == "Y".lower():
         # TODO: Play abort sound
         return
 
