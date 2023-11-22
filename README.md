@@ -72,7 +72,7 @@ git clone git@github.com:micartey/karl-the-voice-assistant.git \
 Afterward, you can simply execute the following command. `Makefile` should be pre-installed on most linux distros. If this is not the case for you, make sure to install Makefile first.
 
 ```shell
-make setup
+make install
 ```
 
 While executing the setup script, a new `.env` file will be created. Make sure to edit the file, as it will store your `OPENAI_API_TOKEN` which you need to provide.
@@ -115,5 +115,5 @@ The python app will automatically look for a json with the same filename in the 
 ### Wake Word
 
 You can choose a wake word to trigger the voice assistant to listen and process the next sentence(s).
-The wake word can be configured in the `.env` file as well, by setting `WAKE_WORD` to a disired word / name.
+The wake word can be configured in the `.env` file as well, by setting `WAKE_WORD` to a desired word / name.
 Some words work better than others, so this step requires some trial and error.

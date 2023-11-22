@@ -7,12 +7,12 @@ requirements:
 	@echo "Generate requirements.txt"
 	@source venv/bin/activate; ./generate_requirements.sh
 
-install:
+install: setup
 	@echo "Setup virtual environment"
 	@python -m venv venv
 	@source venv/bin/activate; pip install -r requirements.txt
 
-setup: install
+setup:
 	@rm -rf .env
 	@cp assets/templates/.env.template .env
 
