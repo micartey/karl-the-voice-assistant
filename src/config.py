@@ -24,6 +24,8 @@ WAKE_WORD = os.getenv("WAKE_WORD")
 ROLE = os.getenv("ROLE")
 
 AMBIENT_NOISE_LEVEL = os.getenv("AMBIENT_NOISE_LEVEL")
+SAMPLE_RATE = os.getenv("SAMPLE_RATE")
+CHUNK_SIZE = os.getenv("CHUNK_SIZE")
 
 #
 # Objects

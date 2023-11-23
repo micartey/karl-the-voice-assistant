@@ -5,12 +5,16 @@ from loguru import logger
 
 import src.config as config
 from src.audio.play import play_mp3, play_wav
+from src.audio.record import AudioRecorder
 from src.parser.prompt import Prompt
 from src.voice.wake_word import listen_for_wake_word
 from src.voice.request import record_audio_sample
 from src.voice.response import generate_response
 from src.voice.synthesize import text_to_speech
 from src.voice.transcription import transcripe_audio_file
+
+# Configure input device
+AudioRecorder.select_input_device()
 
 # Read System Role Prompt and Voice Data
 prompt = Prompt.load_from_json(config.ROLE)

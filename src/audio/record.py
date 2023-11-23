@@ -6,17 +6,44 @@ import pyaudio
 
 from loguru import logger
 
+from src import config
+
 # This line serves no purpose except to hide the ALSA errors. Don't ask me why this works
 # https://github.com/Uberi/speech_recognition/issues/182#issuecomment-1426939447
 _ = sounddevice.default
 
 
 class AudioRecorder:
+    # Class variable to store the selected device index
+    selected_device_index = None
+
+    @staticmethod
+    def select_input_device():
+        pyaudio_instance = pyaudio.PyAudio()
+
+        if pyaudio_instance.get_device_count() == 1:
+            AudioRecorder.selected_device_index = 0
+            return
+
+        print(
+            "Multiple input devices detected. Please specity which device you want to use:"
+        )
+        for i in range(pyaudio_instance.get_device_count()):
+            dev = pyaudio_instance.get_device_info_by_index(i)
+            if dev["maxInputChannels"] > 0:
+                print(f"{i}: {dev['name']}")
+
+        # User selects the device
+        AudioRecorder.selected_device_index = int(
+            input("Enter the number of the desired input device: ")
+        )
+        pyaudio_instance.terminate()
+
     def __init__(self, min_duration=5, silence_threshold=500, silence_duration=4):
-        self.chunk_size = 4096
+        self.chunk_size = int(config.CHUNK_SIZE)
         self.audio_format = pyaudio.paInt16
         self.channels = 1
-        self.sample_rate = 44100
+        self.sample_rate = int(config.SAMPLE_RATE)
         self.silence_threshold = silence_threshold
         self.silence_duration = silence_duration
 
@@ -34,6 +61,7 @@ class AudioRecorder:
             channels=self.channels,
             rate=self.sample_rate,
             input=True,
+            input_device_index=AudioRecorder.selected_device_index,
             frames_per_buffer=self.chunk_size,
         )
 
