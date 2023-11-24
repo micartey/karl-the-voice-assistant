@@ -27,6 +27,8 @@ AMBIENT_NOISE_LEVEL = os.getenv("AMBIENT_NOISE_LEVEL")
 SAMPLE_RATE = os.getenv("SAMPLE_RATE")
 CHUNK_SIZE = os.getenv("CHUNK_SIZE")
 
+DEBUG_RMS = os.getenv("DEBUG_RMS")
+
 #
 # Objects
 #

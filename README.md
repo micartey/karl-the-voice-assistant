@@ -55,7 +55,7 @@ Not good traits for a wake word detection.
 The rough functionallity is already implemented and you can have continues conversations. 
 However, there are still some things to do!  
 
-- [ ] Fix the wake word performance bottle neck to be able to run it on a Raspberry Pi 4 
+- [ ] Fix the wake word performance bottleneck to be able to run it on a Raspberry Pi 4 
 - [ ] Function calling (Useful for smart home solutions)
 - [ ] Alarm clock
 
@@ -87,13 +87,13 @@ make start
 
 You might want to adjust the noise level depending on your microphone and ambient noise.
 To do this, you first have to figure out, what rms you have. 
-This can be done, by executing the following command:
+This can be done, by setting the following environment flag and restarting the application:
 
 ```shell
-source venv/bin/activate; python src/test/ambient_noise_level.py
+export DEBUG_RMS=true
 ```
 
-The script will print the current rms which will go up if you talk e.g.
+This will print the rms which will go up if you e.g talk.
 Figure out what values are displayed when being silent and what values are displayed when talking.
 After you have figured out the value, you can specify it in the `.env` file (default: 20).
 
