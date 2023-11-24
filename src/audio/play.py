@@ -1,7 +1,6 @@
 import wave
-
 import pyaudio
-from playsound import playsound
+import ffmpeg
 
 
 def play_wav(filename: str) -> None:
@@ -36,8 +35,9 @@ def play_wav(filename: str) -> None:
 
 def play_mp3(filename: str) -> None:
     """
-    You might want to install pip install pygobject
+    Translate mp3 to wav as my raspberry pi is only able to play wav files for some weird reason
     :param filename: path to the file (with name)
     :return: sound
     """
-    playsound(filename)
+    ffmpeg.input(filename).output(f"{filename}.wav").run()
+    play_wav(f"{filename}.wav")

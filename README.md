@@ -56,6 +56,7 @@ The rough functionallity is already implemented and you can have continues conve
 However, there are still some things to do!  
 
 - [ ] Fix the wake word performance bottleneck to be able to run it on a Raspberry Pi 4 
+- [ ] Hide ffmpeg output
 - [ ] Function calling (Useful for smart home solutions)
 - [ ] Alarm clock
 
