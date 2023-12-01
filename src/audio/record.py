@@ -21,13 +21,14 @@ class AudioRecorder:
     def select_input_device():
         pyaudio_instance = pyaudio.PyAudio()
 
-        if pyaudio_instance.get_device_count() == 1:
-            AudioRecorder.selected_device_index = 0
+        if pyaudio_instance.get_device_count() <= 1:
+            AudioRecorder.selected_device_index = 1
             return
 
         print(
             "Multiple input devices detected. Please specity which device you want to use:"
         )
+
         for i in range(pyaudio_instance.get_device_count()):
             dev = pyaudio_instance.get_device_info_by_index(i)
             if dev["maxInputChannels"] > 0:

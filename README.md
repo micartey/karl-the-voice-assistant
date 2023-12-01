@@ -22,10 +22,6 @@
   <a href="https://github.com/micartey/karl-the-voice-assistant/issues">Troubleshooting</a>
 </p>
 
-<div align="center">
-    <p style="color: #e84b66"><b>Insufficient performance on a Raspberry Pi</b></p>
-</div>
-
 ## 📚 Introduction
 
 
@@ -35,7 +31,7 @@ The wake word detection is done on the client side and not processed by any clou
 
 ### Motivation
 
-I coded this voice assistant, to tackle two goals: 
+I coded this voice assistant, to tackle some goals: 
 
 1. Refactor an old and broken Apple HomePod 1 and build my own voice assistant.
 2. Get to know Python development as I am mostly sticking to Java
@@ -55,9 +51,8 @@ Not good traits for a wake word detection.
 The rough functionallity is already implemented and you can have continues conversations. 
 However, there are still some things to do!  
 
-- [ ] Fix the wake word performance bottleneck to be able to run it on a Raspberry Pi 4 
-- [ ] Hide ffmpeg output
 - [ ] Function calling (Useful for smart home solutions)
+- [ ] Hide ffmpeg output
 - [ ] Alarm clock
 
 ## 🚀 Getting Started
@@ -115,6 +110,8 @@ The python app will automatically look for a json with the same filename in the 
 
 ### Wake Word
 
-You can choose a wake word to trigger the voice assistant to listen and process the next sentence(s).
-The wake word can be configured in the `.env` file as well, by setting `WAKE_WORD` to a desired word / name.
-Some words work better than others, so this step requires some trial and error.
+Previously, whisper was used for the wake word detection.
+However, whisper is too heavy for a raspberry pi and this unusable.
+Therefore, [openWakeWord](https://github.com/dscripka/openWakeWord#training-new-models) is being used now.
+A disadvantage is the overhead for using a different wake word.
+You now have to train the wake word which takes time.
