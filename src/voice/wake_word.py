@@ -45,7 +45,7 @@ def listen_for_wake_word() -> None:
 
             for prediction in predictions:
                 for score in prediction.values():
-                    if float(score) <= int(WAKE_WORD_THRESHOLD):
+                    if float(score) <= float(WAKE_WORD_THRESHOLD):
                         continue
 
                     logger.info(f"Detected wake word with score of {score}")
