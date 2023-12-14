@@ -20,13 +20,9 @@ def process_predictions(predictions: list) -> float:
 
     for prediction in predictions:
         for score in prediction.values():
-            if float(score) <= float(WAKE_WORD_THRESHOLD):
-                continue
-
-            logger.info(f"Detected wake word with score of {score}")
             value = max(float(score), value)
 
-    logger.debug(f"Max score: {value}")
+    logger.debug(f"Wake word score: {value}")
     return value
 
 
