@@ -4,7 +4,12 @@ from loguru import logger
 from openwakeword.model import Model
 
 from src.audio.record import AudioRecorder
-from src.config import AMBIENT_NOISE_LEVEL, WAKE_WORD_FILE
+from src.config import (
+    AMBIENT_NOISE_LEVEL,
+    WAKE_WORD_FILE,
+    WAKE_WORD_THRESHOLD,
+    WAKE_WORD_COUNT,
+)
 
 model = Model(
     wakeword_models=[f"{WAKE_WORD_FILE}"],
@@ -40,7 +45,7 @@ def listen_for_wake_word() -> None:
 
             for prediction in predictions:
                 for score in prediction.values():
-                    if float(score) < 0.005:
+                    if float(score) <= int(WAKE_WORD_THRESHOLD):
                         continue
 
                     logger.info(f"Detected wake word with score of {score}")
@@ -49,7 +54,7 @@ def listen_for_wake_word() -> None:
             logger.debug(f"Found {matches} matches")
             return matches
 
-        if process_predictions() >= 1:
+        if process_predictions() >= int(WAKE_WORD_COUNT):
             break
 
 
