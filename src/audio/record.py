@@ -73,7 +73,7 @@ class AudioRecorder:
         logger.info("Start recording audio")
 
     def process_stream(self) -> bool:
-        data = self.stream.read(self.chunk_size)
+        data = self.stream.read(self.chunk_size, exception_on_overflow=False)
         self.frames.append(data)
 
         # Check volume
