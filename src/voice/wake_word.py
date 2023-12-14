@@ -8,12 +8,26 @@ from src.config import (
     AMBIENT_NOISE_LEVEL,
     WAKE_WORD_FILE,
     WAKE_WORD_THRESHOLD,
-    WAKE_WORD_COUNT,
 )
 
 model = Model(
     wakeword_models=[f"{WAKE_WORD_FILE}"],
 )
+
+
+def process_predictions(predictions: list) -> float:
+    value = 0
+
+    for prediction in predictions:
+        for score in prediction.values():
+            if float(score) <= float(WAKE_WORD_THRESHOLD):
+                continue
+
+            logger.info(f"Detected wake word with score of {score}")
+            value = max(float(score), value)
+
+    logger.debug(f"Max score: {value}")
+    return value
 
 
 def listen_for_wake_word() -> None:
@@ -38,23 +52,8 @@ def listen_for_wake_word() -> None:
         recorder.save_recording(stream_file.name)
 
         predictions = model.predict_clip(stream_file.name)
-        logger.debug("Debugging predictions")
 
-        def process_predictions() -> int:
-            matches = 0
-
-            for prediction in predictions:
-                for score in prediction.values():
-                    if float(score) <= float(WAKE_WORD_THRESHOLD):
-                        continue
-
-                    logger.info(f"Detected wake word with score of {score}")
-                    matches += 1
-
-            logger.debug(f"Found {matches} matches")
-            return matches
-
-        if process_predictions() >= int(WAKE_WORD_COUNT):
+        if process_predictions(predictions) >= float(WAKE_WORD_THRESHOLD):
             break
 
 
