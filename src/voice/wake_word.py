@@ -35,18 +35,21 @@ def listen_for_wake_word() -> None:
         predictions = model.predict_clip(stream_file.name)
         logger.debug("Debugging predictions")
 
-        def process_predictions() -> bool:
+        def process_predictions() -> int:
+            matches = 0
+
             for prediction in predictions:
                 for score in prediction.values():
                     if float(score) < 0.005:
                         continue
 
                     logger.info(f"Detected wake word with score of {score}")
-                    return True
+                    matches += 1
 
-            return False
+            logger.debug(f"Found {matches} matches")
+            return matches
 
-        if process_predictions():
+        if process_predictions() >= 1:
             break
 
 
