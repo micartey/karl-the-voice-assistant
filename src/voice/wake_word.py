@@ -1,13 +1,13 @@
-import pvrecorder
+import tempfile
+
 from loguru import logger
-
-
-import openwakeword
 from openwakeword.model import Model
 
-openwakeword.utils.download_models()
+from src.audio.record import AudioRecorder
+from src.config import AMBIENT_NOISE_LEVEL, WAKE_WORD_FILE
+
 model = Model(
-    # wakeword_models=[f"{WAKE_WORD_FILE}"],
+    wakeword_models=[f"{WAKE_WORD_FILE}"],
 )
 
 
@@ -16,40 +16,40 @@ def listen_for_wake_word() -> None:
     Listen for wake word
     :return: True once wake word has been detected
     """
-    recorder = pvrecorder.PvRecorder(device_index=-1, frame_length=16_000)
-
-    recorder.start()
-
-    logger.info("Listening for wake word")
-
     while True:
-        pcm = recorder.read()
-        prediction = model.predict(pcm)
+        recorder = AudioRecorder(
+            min_duration=3,
+            silence_duration=1,
+            silence_threshold=int(AMBIENT_NOISE_LEVEL),
+        )
 
-        print(prediction)
+        stream_file = tempfile.NamedTemporaryFile(mode="w+", suffix=".wav", delete=True)
+        recorder.start_recording()
 
-    recorder.delete()
+        while recorder.process_stream():
+            ...
+
+        recorder.stop_recording()
+        recorder.save_recording(stream_file.name)
+
+        predictions = model.predict_clip(stream_file.name)
+        logger.debug("Debugging predictions")
+
+        def process_predictions() -> bool:
+            for prediction in predictions:
+                for score in prediction.values():
+                    if float(score) < 0.005:
+                        continue
+
+                    logger.info(f"Detected wake word with score of {score}")
+                    return True
+
+            return False
+
+        if process_predictions():
+            break
 
 
-# def listen_for_wake_word() -> None:
-#     model = whisper.load_model("base")
-#
-#     while True:
-#         recorder = AudioRecorder(
-#             min_duration=3,
-#             silence_duration=1,
-#             silence_threshold=int(AMBIENT_NOISE_LEVEL),
-#         )
-#
-#         stream_file = tempfile.NamedTemporaryFile(mode="w+", suffix=".wav", delete=True)
-#         recorder.start_recording()
-#
-#         while recorder.process_stream():
-#             ...
-#
-#         recorder.stop_recording()
-#         recorder.save_recording(stream_file.name)
-#
 #         audio = whisper.load_audio(stream_file.name)
 #         audio = whisper.pad_or_trim(audio)
 #
