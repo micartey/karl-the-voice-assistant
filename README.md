@@ -89,9 +89,17 @@ This can be done, by setting the following environment flag and restarting the a
 export DEBUG_RMS=true
 ```
 
-This will print the rms which will go up if you e.g talk.
+This will print the rms which will go up if you talk.
 Figure out what values are displayed when being silent and what values are displayed when talking.
 After you have figured out the value, you can specify it in the `.env` file (default: 20).
+
+Another usefull debugging feature is to enable playback.
+
+```shell
+export DEBUG_WAKE_WORD=true
+```
+
+This will playback your spoken word, so you can hear what the application is hearing which might explain a lot when even you cannot understand yourself.
 
 ### Roles
 

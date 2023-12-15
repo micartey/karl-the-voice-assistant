@@ -31,6 +31,7 @@ SAMPLE_RATE = os.getenv("SAMPLE_RATE")
 CHUNK_SIZE = os.getenv("CHUNK_SIZE")
 
 DEBUG_RMS = os.getenv("DEBUG_RMS")
+DEBUG_WAKE_WORD = os.getenv("DEBUG_WAKE_WORD")
 
 #
 # Objects

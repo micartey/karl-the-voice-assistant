@@ -79,7 +79,7 @@ class AudioRecorder:
         # Check volume
         rms = audioop.rms(data, 2)
 
-        if str(config.DEBUG_RMS) == "true":
+        if config.DEBUG_RMS:
             logger.debug(f"RMS: {rms}")
 
         if rms > self.silence_threshold:

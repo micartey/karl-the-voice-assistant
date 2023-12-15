@@ -3,11 +3,13 @@ import tempfile
 from loguru import logger
 from openwakeword.model import Model
 
+from src.audio.play import play_wav
 from src.audio.record import AudioRecorder
 from src.config import (
     AMBIENT_NOISE_LEVEL,
     WAKE_WORD_FILE,
     WAKE_WORD_THRESHOLD,
+    DEBUG_WAKE_WORD,
 )
 
 model = Model(
@@ -46,6 +48,9 @@ def listen_for_wake_word() -> None:
 
         recorder.stop_recording()
         recorder.save_recording(stream_file.name)
+
+        if DEBUG_WAKE_WORD:
+            play_wav(stream_file.name)
 
         predictions = model.predict_clip(stream_file.name)
 
