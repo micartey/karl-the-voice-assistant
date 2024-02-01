@@ -40,11 +40,12 @@ I coded this voice assistant, to tackle some goals:
 ### Hardships
 
 The wake word detection is the hardest issue to solve. 
-It still is not perfect and uses a local whisper instance to check for the wake word.
-**Using a local whisper instance doesn't really work on a Raspberry Pi and takes tens of seconds to decode** but also provides the best results...
+I started with using a local whisper instance and while this worked perfectly, an embedded device such as the Rhaspberry Pi 4 has to little power to run a whisper model.
 
-A second possibility is to use pocketsphinx - This seems to work on a Raspberry Pi, **however**, it is very limited and inaccuarte and also slow.
-Not good traits for a wake word detection.
+I then went on the search for wake word detections that can run on an embedded devices and the only good and working soltion out there seems to be picovoice.
+There are a few things I don't like about this:
+- depending on proprietary software
+- they really like to ban their users for providing a false identity (so I heared 😆)
 
 ### TODO
 
@@ -53,7 +54,7 @@ However, there are still some things to do!
 
 - [ ] Function calling (Useful for smart home solutions)
 - [ ] Hide ffmpeg output
-- [ ] Alarm clock
+- [ ] Alarm clock / Timer
 
 ## 🚀 Getting Started
 
@@ -118,8 +119,5 @@ The python app will automatically look for a json with the same filename in the 
 
 ### Wake Word
 
-Previously, whisper was used for the wake word detection.
-However, whisper is too heavy for a raspberry pi and this unusable.
-Therefore, [openWakeWord](https://github.com/dscripka/openWakeWord#training-new-models) is being used now.
-A disadvantage is the overhead for using a different wake word.
-You now have to train the wake word which takes time.
+[PicoVoice](https://picovoice.ai/) is a fast and mostly accurate wake word detection and "training" custom models is fast and works without any hardships.
+However, custom models run on only the hardware that you selected, which might not be desirable when testing. 

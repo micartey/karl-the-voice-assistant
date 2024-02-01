@@ -20,6 +20,7 @@ logger.add("logs/log_{time}.log", rotation="10 MB", serialize=True)
 # Environment variables
 #
 OPENAI_API_TOKEN = os.getenv("OPENAI_API_TOKEN")
+PICOVOICE_API_TOKEN = os.getenv("PICOVOICE_API_TOKEN")
 
 WAKE_WORD_FILE = os.getenv("WAKE_WORD_FILE")
 ROLE = os.getenv("ROLE")
@@ -31,7 +32,6 @@ SAMPLE_RATE = os.getenv("SAMPLE_RATE")
 CHUNK_SIZE = os.getenv("CHUNK_SIZE")
 
 DEBUG_RMS = os.getenv("DEBUG_RMS")
-DEBUG_WAKE_WORD = os.getenv("DEBUG_WAKE_WORD")
 
 #
 # Objects

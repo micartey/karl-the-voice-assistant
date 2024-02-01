@@ -61,7 +61,7 @@ def main():
     # Detect wake word, can be configured setting WAKE_WORD environment variable
     while True:
         listen_for_wake_word()
-        logger.info("Signal word detected... Start recording")
+        logger.info("Wake word detected!")
         on_signal()
 
 

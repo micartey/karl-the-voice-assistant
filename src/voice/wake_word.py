@@ -1,62 +1,48 @@
-import tempfile
+import struct
 
+import pvporcupine
+import pyaudio
 from loguru import logger
-from openwakeword.model import Model
 
-from src.audio.play import play_wav
-from src.audio.record import AudioRecorder
 from src.config import (
-    AMBIENT_NOISE_LEVEL,
+    PICOVOICE_API_TOKEN,
     WAKE_WORD_FILE,
-    WAKE_WORD_THRESHOLD,
-    DEBUG_WAKE_WORD,
 )
 
-model = Model(
-    wakeword_models=[f"{WAKE_WORD_FILE}"],
+picovoice = pvporcupine.create(
+    access_key=PICOVOICE_API_TOKEN,
+    keyword_paths=[f"{WAKE_WORD_FILE}"]
+    # keywords=["ok google"]
 )
-
-
-def process_predictions(predictions: list) -> float:
-    value = 0
-
-    for prediction in predictions:
-        for score in prediction.values():
-            value = max(float(score), value)
-
-    logger.debug(f"Wake word score: {value}")
-    return value
 
 
 def listen_for_wake_word() -> None:
     """
     Listen for wake word
-    :return: True once wake word has been detected
+    :return: finishes once word has been detected
     """
+
+    pa = pyaudio.PyAudio()
+    audio_stream = pa.open(
+        rate=picovoice.sample_rate,
+        channels=1,
+        format=pyaudio.paInt16,
+        input=True,
+        frames_per_buffer=picovoice.frame_length
+    )
+
     while True:
-        recorder = AudioRecorder(
-            min_duration=3,
-            silence_duration=1,
-            silence_threshold=int(AMBIENT_NOISE_LEVEL),
-        )
+        pcm = audio_stream.read(picovoice.frame_length)
+        pcm = struct.unpack_from("h" * picovoice.frame_length, pcm)
 
-        stream_file = tempfile.NamedTemporaryFile(mode="w+", suffix=".wav", delete=True)
-        recorder.start_recording()
-
-        while recorder.process_stream():
-            ...
-
-        recorder.stop_recording()
-        recorder.save_recording(stream_file.name)
-
-        if DEBUG_WAKE_WORD:
-            play_wav(stream_file.name)
-
-        predictions = model.predict_clip(stream_file.name)
-
-        if process_predictions(predictions) >= float(WAKE_WORD_THRESHOLD):
+        keyword_index = picovoice.process(pcm)
+        if keyword_index >= 0:
+            # Wake word detected, abort loop
             break
 
+    audio_stream.stop_stream()
+    audio_stream.close()
+    pa.terminate()
 
 #         audio = whisper.load_audio(stream_file.name)
 #         audio = whisper.pad_or_trim(audio)
