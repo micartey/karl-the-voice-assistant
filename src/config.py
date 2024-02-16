@@ -20,7 +20,9 @@ logger.add("logs/log_{time}.log", rotation="10 MB", serialize=True)
 # Environment variables
 #
 OPENAI_API_TOKEN = os.getenv("OPENAI_API_TOKEN")
-WAKE_WORD = os.getenv("WAKE_WORD")
+PICOVOICE_API_TOKEN = os.getenv("PICOVOICE_API_TOKEN")
+
+WAKE_WORD_FILE = os.getenv("WAKE_WORD_FILE")
 ROLE = os.getenv("ROLE")
 
 AMBIENT_NOISE_LEVEL = os.getenv("AMBIENT_NOISE_LEVEL")
@@ -37,7 +39,7 @@ openai = OpenAI(api_key=OPENAI_API_TOKEN)
 abort_prompt = [
     {
         "role": "system",
-        "content": "You will be provided with some words or sentences. If the sentences go into "
+        "content": "You will be provided with some words or sentences. If the sentence goes into "
         'the direction to abort, stop or to be silent: Return "Y". Else Return "N"',
     },
 ]

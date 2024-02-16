@@ -12,7 +12,7 @@ def record_audio_sample(file: str) -> None:
     recorder = AudioRecorder(
         silence_threshold=int(AMBIENT_NOISE_LEVEL),
         silence_duration=2,
-        min_duration=2,
+        min_duration=6,
     )
     recorder.start_recording()
 

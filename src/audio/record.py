@@ -21,13 +21,14 @@ class AudioRecorder:
     def select_input_device():
         pyaudio_instance = pyaudio.PyAudio()
 
-        if pyaudio_instance.get_device_count() == 1:
-            AudioRecorder.selected_device_index = 0
+        if pyaudio_instance.get_device_count() <= 1:
+            AudioRecorder.selected_device_index = 1
             return
 
         print(
             "Multiple input devices detected. Please specity which device you want to use:"
         )
+
         for i in range(pyaudio_instance.get_device_count()):
             dev = pyaudio_instance.get_device_info_by_index(i)
             if dev["maxInputChannels"] > 0:
@@ -72,13 +73,13 @@ class AudioRecorder:
         logger.info("Start recording audio")
 
     def process_stream(self) -> bool:
-        data = self.stream.read(self.chunk_size)
+        data = self.stream.read(self.chunk_size, exception_on_overflow=False)
         self.frames.append(data)
 
         # Check volume
         rms = audioop.rms(data, 2)
 
-        if str(config.DEBUG_RMS) == "true":
+        if config.DEBUG_RMS:
             logger.debug(f"RMS: {rms}")
 
         if rms > self.silence_threshold:

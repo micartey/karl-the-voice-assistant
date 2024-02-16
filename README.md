@@ -22,20 +22,16 @@
   <a href="https://github.com/micartey/karl-the-voice-assistant/issues">Troubleshooting</a>
 </p>
 
-<div align="center">
-    <p style="color: #e84b66"><b>Insufficient performance on a Raspberry Pi</b></p>
-</div>
-
 ## 📚 Introduction
 
 
 This project is a simple voice assistant that watches for a wake word, plays a sound once the wake word has been recognized and listens for audio input.
-The aim of this voice assistant is, to have a voice assistant with the power of OpenAI's GPT and continouse conversations.
+The aim of this voice assistant is, to have a voice assistant with the power of OpenAI's GPT and continuous conversations.
 The wake word detection is done on the client side and not processed by any cloud provider as per [concept](CONCEPT.md).
 
 ### Motivation
 
-I coded this voice assistant, to tackle two goals: 
+I coded this voice assistant, to tackle some goals: 
 
 1. Refactor an old and broken Apple HomePod 1 and build my own voice assistant.
 2. Get to know Python development as I am mostly sticking to Java
@@ -44,21 +40,22 @@ I coded this voice assistant, to tackle two goals:
 ### Hardships
 
 The wake word detection is the hardest issue to solve. 
-It still is not perfect and uses a local whisper instance to check for the wake word.
-**Using a local whisper instance doesn't really work on a Raspberry Pi and takes tens of seconds to decode** but also provides the best results...
+I started with using a local whisper instance and while this worked perfectly, an embedded device such as the Raspberry Pi 4 has to little power to run a whisper model.
 
-A second possibility is to use pocketsphinx - This seems to work on a Raspberry Pi, **however**, it is very limited and inaccuarte and also slow.
-Not good traits for a wake word detection.
+I then went on the search for wake word detections that can run on an embedded device and the only good and working solution out there seems to be picovoice.
+There are a few things I don't like about this:
+
+- depending on proprietary software for wake words
+- they seem to just ban users randomly as well as a [company with bad reputation](https://www.reddit.com/r/cscareerquestionsCAD/comments/qee7zp/picovoice_vancouver_interview_dlsde_roles/) in general
 
 ### TODO
 
-The rough functionallity is already implemented and you can have continues conversations. 
+The rough functionality is already implemented, and you can have continues conversations. 
 However, there are still some things to do!  
 
-- [ ] Fix the wake word performance bottleneck to be able to run it on a Raspberry Pi 4 
-- [ ] Hide ffmpeg output
 - [ ] Function calling (Useful for smart home solutions)
-- [ ] Alarm clock
+- [ ] Hide ffmpeg output
+- [ ] Alarm clock / Timer
 
 ## 🚀 Getting Started
 
@@ -76,13 +73,15 @@ Afterward, you can simply execute the following command. `Makefile` should be pr
 make install
 ```
 
-While executing the setup script, a new `.env` file will be created. Make sure to edit the file, as it will store your `OPENAI_API_TOKEN` which you need to provide.
+While executing the setup script, a new `.env` file will be created. Make sure to edit the file, as it will store your api tokens which you need to provide.
 
 Afterward, you can simply start the voice assistant by executing the following command:
 
 ```shell
 make start
 ```
+
+You can use a tool like [screen](https://linuxize.com/post/how-to-use-linux-screen/) if you want to run the application in the background.
 
 ### Adjust noise level
 
@@ -94,7 +93,7 @@ This can be done, by setting the following environment flag and restarting the a
 export DEBUG_RMS=true
 ```
 
-This will print the rms which will go up if you e.g talk.
+This will print the rms which will go up if you talk.
 Figure out what values are displayed when being silent and what values are displayed when talking.
 After you have figured out the value, you can specify it in the `.env` file (default: 20).
 
@@ -115,6 +114,5 @@ The python app will automatically look for a json with the same filename in the 
 
 ### Wake Word
 
-You can choose a wake word to trigger the voice assistant to listen and process the next sentence(s).
-The wake word can be configured in the `.env` file as well, by setting `WAKE_WORD` to a desired word / name.
-Some words work better than others, so this step requires some trial and error.
+[Picovoice](https://picovoice.ai/) is a fast and mostly accurate wake word detection and "training" custom models is fast and works without any hardships.
+However, custom models run on only the hardware that you selected, which might not be desirable when testing it on e.g. Windows. I am fairly certain that this is intentionally as the "training" doesn't even take a second to do.
