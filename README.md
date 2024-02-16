@@ -81,6 +81,8 @@ Afterward, you can simply start the voice assistant by executing the following c
 make start
 ```
 
+You can use a tool like [screen](https://linuxize.com/post/how-to-use-linux-screen/) if you want to run the application in the background.
+
 ### Adjust noise level
 
 You might want to adjust the noise level depending on your microphone and ambient noise.
