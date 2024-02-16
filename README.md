@@ -26,7 +26,7 @@
 
 
 This project is a simple voice assistant that watches for a wake word, plays a sound once the wake word has been recognized and listens for audio input.
-The aim of this voice assistant is, to have a voice assistant with the power of OpenAI's GPT and continouse conversations.
+The aim of this voice assistant is, to have a voice assistant with the power of OpenAI's GPT and continuous conversations.
 The wake word detection is done on the client side and not processed by any cloud provider as per [concept](CONCEPT.md).
 
 ### Motivation
@@ -40,16 +40,17 @@ I coded this voice assistant, to tackle some goals:
 ### Hardships
 
 The wake word detection is the hardest issue to solve. 
-I started with using a local whisper instance and while this worked perfectly, an embedded device such as the Rhaspberry Pi 4 has to little power to run a whisper model.
+I started with using a local whisper instance and while this worked perfectly, an embedded device such as the Raspberry Pi 4 has to little power to run a whisper model.
 
-I then went on the search for wake word detections that can run on an embedded devices and the only good and working soltion out there seems to be picovoice.
+I then went on the search for wake word detections that can run on an embedded device and the only good and working solution out there seems to be picovoice.
 There are a few things I don't like about this:
-- depending on proprietary software
-- they really like to ban their users for providing a false identity (so I heared 😆)
+
+- depending on proprietary software for wake words
+- they seem to just ban users randomly as well as a [company with bad reputation](https://www.reddit.com/r/cscareerquestionsCAD/comments/qee7zp/picovoice_vancouver_interview_dlsde_roles/) in general
 
 ### TODO
 
-The rough functionallity is already implemented and you can have continues conversations. 
+The rough functionality is already implemented, and you can have continues conversations. 
 However, there are still some things to do!  
 
 - [ ] Function calling (Useful for smart home solutions)
@@ -72,7 +73,7 @@ Afterward, you can simply execute the following command. `Makefile` should be pr
 make install
 ```
 
-While executing the setup script, a new `.env` file will be created. Make sure to edit the file, as it will store your `OPENAI_API_TOKEN` which you need to provide.
+While executing the setup script, a new `.env` file will be created. Make sure to edit the file, as it will store your api tokens which you need to provide.
 
 Afterward, you can simply start the voice assistant by executing the following command:
 
@@ -94,14 +95,6 @@ This will print the rms which will go up if you talk.
 Figure out what values are displayed when being silent and what values are displayed when talking.
 After you have figured out the value, you can specify it in the `.env` file (default: 20).
 
-Another usefull debugging feature is to enable playback.
-
-```shell
-export DEBUG_WAKE_WORD=true
-```
-
-This will playback your spoken word, so you can hear what the application is hearing which might explain a lot when even you cannot understand yourself.
-
 ### Roles
 
 You can set a role for your voice assistant. Roles are stored in [assets/prompts](https://github.com/micartey/karl-the-voice-assistant/tree/master/assets/prompts) and can easily be created and implemented.
@@ -119,5 +112,5 @@ The python app will automatically look for a json with the same filename in the 
 
 ### Wake Word
 
-[PicoVoice](https://picovoice.ai/) is a fast and mostly accurate wake word detection and "training" custom models is fast and works without any hardships.
-However, custom models run on only the hardware that you selected, which might not be desirable when testing. 
+[Picovoice](https://picovoice.ai/) is a fast and mostly accurate wake word detection and "training" custom models is fast and works without any hardships.
+However, custom models run on only the hardware that you selected, which might not be desirable when testing it on e.g. Windows. I am fairly certain that this is intentionally as the "training" doesn't even take a second to do.
