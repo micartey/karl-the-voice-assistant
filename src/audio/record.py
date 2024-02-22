@@ -21,23 +21,32 @@ class AudioRecorder:
     def select_input_device():
         pyaudio_instance = pyaudio.PyAudio()
 
-        if pyaudio_instance.get_device_count() <= 1:
-            AudioRecorder.selected_device_index = 1
-            return
+        available_microphones = [
+            (i, pyaudio_instance.get_device_info_by_index(i)["name"])
+            for i in range(pyaudio_instance.get_device_count())
+            if pyaudio_instance.get_device_info_by_index(i)["maxInputChannels"] > 0
+        ]
 
-        print(
-            "Multiple input devices detected. Please specity which device you want to use:"
-        )
+        if len(available_microphones) <= 1:
+            AudioRecorder.selected_device_index = (
+                available_microphones[0][0] if available_microphones else -1
+            )
 
-        for i in range(pyaudio_instance.get_device_count()):
-            dev = pyaudio_instance.get_device_info_by_index(i)
-            if dev["maxInputChannels"] > 0:
-                print(f"{i}: {dev['name']}")
+            logger.debug(f"Selected {available_microphones[0][1]}")
 
-        # User selects the device
-        AudioRecorder.selected_device_index = int(
-            input("Enter the number of the desired input device: ")
-        )
+        else:
+            print(
+                "Multiple input devices detected. Please specify which device you want to use:"
+            )
+
+            # Print a list of available microphones
+            for index, name in available_microphones:
+                print(f"{index}: {name}")
+
+            AudioRecorder.selected_device_index = int(
+                input("Enter the number of the desired input device: ")
+            )
+
         pyaudio_instance.terminate()
 
     def __init__(self, min_duration=5, silence_threshold=500, silence_duration=4):
