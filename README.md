@@ -116,4 +116,5 @@ The python app will automatically look for a json with the same filename in the 
 ### Wake Word
 
 [Picovoice](https://picovoice.ai/) is a fast and mostly accurate wake word detection and "training" custom models is fast and works without any hardships.
-However, custom models run on only the hardware that you selected, which might not be desirable when testing it on e.g. Windows. I am fairly certain that this is intentionally as the "training" doesn't even take a second to do.
+However, custom models run on only the hardware that you selected, which might not be desirable when testing it on e.g. Windows. 
+I am fairly certain that this is intentionally as the "training" doesn't even take a second to do and no data at all.
