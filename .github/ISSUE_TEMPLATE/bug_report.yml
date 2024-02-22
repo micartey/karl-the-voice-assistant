@@ -1,0 +1,46 @@
+name: Bug Report
+description: Describe a bug you noticed
+title: "Bug Report | "
+labels: ["Bug Report"]
+
+assignees:
+  - micartey
+
+body:
+  - type: textarea
+    id: general
+    attributes:
+      label: "Summary"
+      description: |
+        Sum up your bug
+    validations:
+      required: true
+
+  - type: textarea
+    id: info
+    attributes:
+      label: "When does the bug occure?"
+      description: |
+        What message / exception is being displayed?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      description: Where is the bug located?
+      options:
+        - Source
+        - Dependency
+        - Linux
+        - Somewhere else
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: "Additional information"
+    validations:
+      required: false

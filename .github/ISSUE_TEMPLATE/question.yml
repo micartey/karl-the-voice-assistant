@@ -1,0 +1,24 @@
+name: Question
+description: State a question you have
+title: "Question | "
+labels: ["Question"]
+
+assignees:
+  - micartey
+
+body:
+  - type: textarea
+    id: general
+    attributes:
+      label: "Question"
+      description: |
+        State your question
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: "Additional information"
+    validations:
+      required: false
