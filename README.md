@@ -46,7 +46,8 @@ I then went on the search for wake word detections that can run on an embedded d
 There are a few things I don't like about this:
 
 - depending on proprietary software for wake words
-- they seem to just ban users randomly as well as a [company with bad reputation](https://www.reddit.com/r/cscareerquestionsCAD/comments/qee7zp/picovoice_vancouver_interview_dlsde_roles/) in general
+- they seem to are a [company with bad reputation](https://www.reddit.com/r/cscareerquestionsCAD/comments/qee7zp/picovoice_vancouver_interview_dlsde_roles/)
+- they ban users on unknown factors. Just pretend you are canadian - worked fine for me
 
 ### TODO
 
