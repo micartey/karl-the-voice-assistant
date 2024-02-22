@@ -113,6 +113,16 @@ To create a new role, simply create a new json file with the desired name.
 To select a role, simply edit `.env` and set the `ROLE` variable to the filename of the json file.
 The python app will automatically look for a json with the same filename in the `prompts` directory.
 
+### Register as a Service
+
+If you are on linux, you can register karl as a service.
+This will allow it to automatically start with your device booting up and easier control.
+You can also be more specific about logging.
+
+```shell
+sudo make service
+```
+
 ### Wake Word
 
 [Picovoice](https://picovoice.ai/) is a fast and mostly accurate wake word detection and "training" custom models is fast and works without any hardships.
