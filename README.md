@@ -1,7 +1,7 @@
 # karl-the-voice-assistant
 
 <div align="center">
-    <img src="assets/images/banner.png" />
+    <img src=".github/assets/images/banner.png" />
 </div>
 
 <br />
