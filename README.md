@@ -19,6 +19,7 @@
   <a href="#-introduction">Introduction</a> •
   <a href="#-getting-started">Getting started</a> •
   <a href="CONCEPT.md">Concept</a> •
+  <a href="homepod/README.md">Homepod</a> •
   <a href="https://github.com/micartey/karl-the-voice-assistant/issues">Troubleshooting</a>
 </p>
 
@@ -33,7 +34,7 @@ The wake word detection is done on the client side and not processed by any clou
 
 I coded this voice assistant, to tackle some goals: 
 
-1. Refactor an old and broken Apple HomePod 1 and build my own voice assistant.
+1. [Refactor an old and broken Apple HomePod 1](homepod/README.md) and build my own voice assistant.
 2. Get to know Python development as I am mostly sticking to Java
 3. Use AI in an useful manner
 
