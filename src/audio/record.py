@@ -66,20 +66,26 @@ class AudioRecorder:
         self.last_sound_time = time.time()
 
     def start_recording(self) -> None:
-        self.stream = self.audio.open(
-            format=self.audio_format,
-            channels=self.channels,
-            rate=self.sample_rate,
-            input=True,
-            input_device_index=AudioRecorder.selected_device_index,
-            frames_per_buffer=self.chunk_size,
-        )
+        while True:
+            try:
+                self.stream = self.audio.open(
+                    format=self.audio_format,
+                    channels=self.channels,
+                    rate=self.sample_rate,
+                    input=True,
+                    input_device_index=AudioRecorder.selected_device_index,
+                    frames_per_buffer=self.chunk_size,
+                )
 
-        self.frames = []
-        self.last_sound_time = time.time()
-        self.recording_start = time.time()
+                self.frames = []
+                self.last_sound_time = time.time()
+                self.recording_start = time.time()
 
-        logger.info("Start recording audio")
+                logger.info("Start recording audio")
+                break
+
+            except OSError:
+                logger.error("Failed to open device. Try again...")
 
     def process_stream(self) -> bool:
         data = self.stream.read(self.chunk_size, exception_on_overflow=False)
