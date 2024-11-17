@@ -1,37 +1,14 @@
 functions:
-  get-weather:
-    kafka-topic: "weather"
-    description: "Get the weather in a given location"
+  alarm:
+    topic: "alarm"
+    description: "Set an alarm for a specific time in seconds"
     parameters:
       - parameter:
-          name: "location"
-          required: true
-      - parameter:
-          name: "days"
-
-  get-news:
-    kafka-topic: "news"
-    descritpion: "Get the local news"
-    parameters:
-      - parameter:
-          name: "location"
-          required: true
-      - parameter:
-          name: "publisher"
-
-  tv-light:
-    kafka-topic: "tv_light"
-    description: "Turn the light behind my tv on or off"
-    parameters:
-      - parameter:
-          name: "enabled"
-          values:
-            - true
-            - false
+          name: "minutes"
           required: true
 
   bedroom-light:
-    kafka-topic: "bedroom_light"
+    topic: "bedroom_light"
     description: "Turn the light in my bedroom on or off"
     parameters:
       - parameter:
