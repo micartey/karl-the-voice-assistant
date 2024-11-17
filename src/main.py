@@ -6,10 +6,10 @@ from loguru import logger
 import src.config as config
 from src.audio.play import play_mp3, play_wav
 from src.audio.record import AudioRecorder
+from src.chat.response import generate_simple_response, generate_response
 from src.parser.prompt import Prompt
 from src.voice.wake_word import listen_for_wake_word
 from src.voice.request import record_audio_sample
-from src.voice.response import generate_response
 from src.voice.synthesize import text_to_speech
 from src.voice.transcription import transcripe_audio_file
 
@@ -40,7 +40,7 @@ def on_signal():
     abort_prompt = copy.deepcopy(config.abort_prompt)
     abort_prompt.append({"role": "user", "content": transcription})
 
-    if generate_response(abort_prompt).lower() == "Y".lower():
+    if generate_simple_response(abort_prompt).upper() == "Y":
         # TODO: Play abort sound
         return
 

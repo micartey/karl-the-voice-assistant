@@ -1,7 +1,7 @@
 # karl-the-voice-assistant
 
 <div align="center">
-    <img src="assets/images/banner.png" />
+    <img src=".github/assets/images/banner.png" />
 </div>
 
 <br />
@@ -55,9 +55,9 @@ There are a few things I don't like about this:
 The rough functionality is already implemented, and you can have continues conversations. 
 However, there are still some things to do!  
 
-- [ ] Function calling (Useful for smart home solutions)
+- [x] Function calling (Useful for smart home solutions)
+- [x] Alarm clock / Timer
 - [ ] Hide ffmpeg output
-- [ ] Alarm clock / Timer
 
 ## 🚀 Getting Started
 

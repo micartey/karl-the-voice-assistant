@@ -1,0 +1,28 @@
+Turn the following yaml into a fitting functions json for you to handle later.
+Don't say anything, just generate the json. For context, your JSON may look as follows.
+Take a good look at what are possible keys and what key is where.
+Make sure there is no topic in the function object.
+Generate missing keys depending on context.
+The required is always at the root of parameters and a list of key names.
+Do not include it inside the paramertes.
+Set the function name to the topic value.
+Try to add a fitting description to each property considering the current context of the function object.
+Use fitting types for the properties.
+
+[
+	{
+		"name": "get_current_weather",
+		"description": "Get the current weather in a given location",
+		"parameters": {
+			"type": "object",
+			"properties": {
+				"location": {
+					"type": "string",
+					"description": "The city and state, e.g. San Francisco, CA",
+				},
+				"unit": {"type": "string", "enum": ["celsius", "fahrenheit"]},
+			},
+			"required": ["location"],
+		},
+	}
+]

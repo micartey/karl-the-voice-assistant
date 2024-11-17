@@ -1,0 +1,19 @@
+functions:
+  timer:
+    topic: "timer"
+    description: "Set an timer for a specific time in seconds"
+    parameters:
+      - parameter:
+          name: "seconds"
+          required: true
+
+  alarm:
+    topic: "alarm"
+    description: "Set an alarm for a specific time in HH:MM 24-hour format"
+    parameters:
+      - parameter:
+          name: "hours"
+          required: true
+      - parameter:
+          name: "minutes"
+          required: true

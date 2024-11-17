@@ -1,6 +1,7 @@
 import os
 import sys
 
+from pymitter import EventEmitter
 from dotenv import load_dotenv
 from loguru import logger
 from openai import OpenAI
@@ -43,3 +44,5 @@ abort_prompt = [
         'the direction to abort, stop or to be silent: Return "Y". Else Return "N"',
     },
 ]
+
+ee = EventEmitter()
