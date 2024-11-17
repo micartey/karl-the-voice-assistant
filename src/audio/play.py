@@ -19,5 +19,5 @@ def play_mp3(filename: str) -> None:
     :param filename: path to the file (with name)
     :return: sound
     """
-    ffmpeg.input(filename).output(f"{filename}.wav").run()
+    ffmpeg.input(filename).filter("volume", volume=1.5).output(f"{filename}.wav").run()
     play_wav(f"{filename}.wav")
