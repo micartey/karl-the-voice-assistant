@@ -1,19 +1,19 @@
 functions:
-  alarm:
-    topic: "alarm"
-    description: "Set an alarm for a specific time in seconds"
+  timer:
+    topic: "timer"
+    description: "Set an timer for a specific time in seconds"
     parameters:
       - parameter:
-          name: "minutes"
+          name: "seconds"
           required: true
 
-  bedroom-light:
-    topic: "bedroom_light"
-    description: "Turn the light in my bedroom on or off"
+  alarm:
+    topic: "alarm"
+    description: "Set an alarm for a specific time in HH:MM 24-hour format"
     parameters:
       - parameter:
-          name: "enabled"
-          values:
-            - true
-            - false
+          name: "hours"
+          required: true
+      - parameter:
+          name: "minutes"
           required: true
