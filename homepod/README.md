@@ -12,7 +12,7 @@ The Rhaspberry Pi has its own place, as well as the amplifier.
 There is enough space for the power supply and the Aux-cable.
 The USB-A connection for the microphone is a corner connector and _bends_ the port to underneath the Rhaspberry pi and its ledge.
 
-![](../assets/images/base_homepod.jpg)
+![](../.github/assets/images/base_homepod.jpg)
 
 ## Mid-Part
 
@@ -20,7 +20,7 @@ The mid-part only contains the original Homepod speaker which is connected to th
 I also added a resistor (300-something Ω) to reduce noise, but I would advise to use a resistor in the range of 50 to 150 Ω.
 Thankfully, I added a small window which is meant to be used for ventilation as I could connect the speaker more easily (the cable is rather short). 
 
-![](../assets/images/mid_homepod.jpg)
+![](../.github/assets/images/mid_homepod.jpg)
 
 ## Top-Part
 
@@ -28,7 +28,7 @@ I decided to use the top part, as it fitted and there was no need to re-invent a
 Maybe I will add some lights to the top, but that would require me to re-invent the mid-part.
 All in all, this looks quite good.
 
-![](../assets/images/full_homepod.jpg)
+![](../.github/assets/images/full_homepod.jpg)
 
 # Charging Port
 
@@ -40,4 +40,4 @@ The charging port should be 3-4mm deeper.
 The connector stands a bit out, but should not be an issue as it is behind the Homepod.
 Most importantly, it connections firmly.
 
-![](../assets/images/complete_homepod.jpg)
+![](../.github/assets/images/complete_homepod.jpg)
