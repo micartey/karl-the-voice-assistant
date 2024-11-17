@@ -8,7 +8,7 @@ def generate_response(messages: list[dict[str, str]]) -> str:
     """
 
     return (
-        openai.chat.completions.create(model="gpt-3.5-turbo", messages=messages)
+        openai.chat.completions.create(model="gpt-4o", messages=messages)
         .choices[0]
         .message
     ).content
