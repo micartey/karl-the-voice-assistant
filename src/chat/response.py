@@ -62,19 +62,8 @@ def generate_response(messages: list[dict[str, str]]) -> str:
 
         ee.emit(name, arguments)
 
-        messages.append(
-            {
-                "role": "assistant",
-                "content": f"Executing required function named #{name}",
-            }
-        )
-        messages.append(
-            {
-                "role": "function",
-                "name": name,
-                "content": f"Successfully executed function #{name}!",
-            }
-        )
+        messages.append(message)
+        messages.append({"role": "function", "name": name, "content": arguments})
 
     return generate_simple_response(messages)
 
