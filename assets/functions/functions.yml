@@ -1,7 +1,7 @@
 functions:
   timer:
     topic: "timer"
-    description: "Set an timer for a specific time in seconds"
+    description: "Set an alarm for a specific time in seconds"
     parameters:
       - parameter:
           name: "seconds"
@@ -9,7 +9,7 @@ functions:
 
   alarm:
     topic: "alarm"
-    description: "Set an alarm for a specific time in HH:MM 24-hour format"
+    description: "Set an alarm for a specific time in HH:MM 24-hour format if provided with a specific time"
     parameters:
       - parameter:
           name: "hours"
