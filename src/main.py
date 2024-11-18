@@ -9,7 +9,7 @@ from src.audio.record import AudioRecorder
 from src.chat.response import generate_simple_response, generate_response
 from src.parser.prompt import Prompt
 
-# from src.voice.wake_word import listen_for_wake_word
+from src.voice.wake_word import listen_for_wake_word
 from src.voice.request import record_audio_sample
 from src.voice.synthesize import text_to_speech
 from src.voice.transcription import transcripe_audio_file
@@ -61,7 +61,7 @@ def on_signal():
 def main():
     # Detect wake word, can be configured setting WAKE_WORD environment variable
     while True:
-        # listen_for_wake_word()
+        listen_for_wake_word()
         logger.info("Wake word detected!")
         on_signal()
 
