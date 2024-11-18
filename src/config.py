@@ -1,3 +1,4 @@
+import importlib
 import os
 import sys
 
@@ -24,6 +25,7 @@ OPENAI_API_TOKEN = os.getenv("OPENAI_API_TOKEN")
 PICOVOICE_API_TOKEN = os.getenv("PICOVOICE_API_TOKEN")
 
 WAKE_WORD_FILE = os.getenv("WAKE_WORD_FILE")
+GPT_MODEL = os.getenv("GPT_MODEL")
 ROLE = os.getenv("ROLE")
 
 AMBIENT_NOISE_LEVEL = os.getenv("AMBIENT_NOISE_LEVEL")
@@ -46,3 +48,17 @@ abort_prompt = [
 ]
 
 ee = EventEmitter()
+
+
+def import_functions(directory):
+    for filename in os.listdir(directory):
+        if filename.endswith(".py") and not filename.startswith("__"):
+            module_name = filename[:-3]
+            module_path = os.path.join(directory, filename)
+            spec = importlib.util.spec_from_file_location(module_name, module_path)
+            if spec and spec.loader:
+                module = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(module)
+
+
+import_functions("src/functions")
