@@ -10,8 +10,8 @@ from src.config import ee
 def handle_alarm(json_arg: str) -> None:
     logger.info("Execute function: Alarm")
 
-    hours = json.loads(json_arg)["hours"]
-    minutes = json.loads(json_arg)["minutes"]
+    hours = json.loads(json_arg)["hour"]
+    minutes = json.loads(json_arg)["minute"]
 
     seconds_to_wait = seconds_until_target(hours, minutes)
 

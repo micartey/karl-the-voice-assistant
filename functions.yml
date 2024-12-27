@@ -9,11 +9,11 @@ functions:
 
   alarm:
     topic: "alarm"
-    description: "Set an alarm for a specific time in HH:MM 24-hour format"
+    description: "Set an alarm for a specific time in HH:MM 24-hour format ONLY if given all information (hour and minutes)"
     parameters:
       - parameter:
-          name: "hours"
+          name: "hour"
           required: true
       - parameter:
-          name: "minutes"
+          name: "minute"
           required: true

@@ -25,7 +25,6 @@ messages = [
     {"role": "system", "content": prompt.role},
 ]
 
-
 def on_signal():
     play_wav("assets/sounds/listening.wav")
 
@@ -44,6 +43,10 @@ def on_signal():
         # TODO: Play abort sound
         return
 
+    respond_with_audio(transcription)
+
+
+def respond_with_audio(transcription: str) -> None:
     # Append request to message history
     messages.append({"role": "user", "content": transcription})
 
@@ -53,6 +56,7 @@ def on_signal():
     # Append answer to message history
     messages.append({"role": "assistant", "content": gpt_response})
 
+    # Generate audio file and play it
     response_file = text_to_speech(gpt_response, voice)
     play_mp3(response_file.name)
 

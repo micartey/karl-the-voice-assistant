@@ -1,4 +1,5 @@
 import audioop
+import os
 import time
 import wave
 import sounddevice
@@ -19,6 +20,11 @@ class AudioRecorder:
 
     @staticmethod
     def select_input_device():
+        pre_selected_device = os.getenv("INPUT_DEVICE_INDEX", None)
+        if pre_selected_device is not None:
+            AudioRecorder.selected_device_index = int(pre_selected_device)
+            return
+
         pyaudio_instance = pyaudio.PyAudio()
 
         available_microphones = [

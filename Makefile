@@ -1,5 +1,4 @@
 # Makefile
-SHELL := /bin/bash
 
 PROJECT_PATH=$(shell pwd)
 

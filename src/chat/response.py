@@ -15,7 +15,7 @@ functions = json.loads(
             },
             {
                 "role": "user",
-                "content": open("assets/functions/functions.yml", "r").read(),
+                "content": open("functions.yml", "r").read(),
             },
         ],
     )
@@ -44,6 +44,7 @@ def generate_response(messages: list[dict[str, str]]) -> str:
         name = function_call.name
         arguments = function_call.arguments
 
+        # Actual function call - Return value?
         ee.emit(name, arguments)
 
         messages.append(message)

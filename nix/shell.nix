@@ -10,6 +10,8 @@ pkgs.mkShell rec {
   ];
 
   shellHook = ''
+  export LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath buildInputs}
+
   make install
   '';
 }
