@@ -2,6 +2,7 @@ import tempfile
 from io import BytesIO
 from typing import Literal
 
+from src import config
 from src.config import openai
 
 
@@ -22,3 +23,7 @@ def text_to_speech(
     response_file = tempfile.NamedTemporaryFile(mode="w+", suffix=".mp3", delete=False)
     binary_response.stream_to_file(response_file.name)
     return response_file
+
+
+def text_to_speech_simple(input_text: str) -> BytesIO:
+    return text_to_speech(input_text, config.VOICE)

@@ -1,7 +1,7 @@
 functions:
   timer:
     topic: "timer"
-    description: "Set an timer for a specific time in seconds"
+    description: "Set an timer in seconds or minutes. Only use this if time is relative and not absolut"
     parameters:
       - parameter:
           name: "seconds"

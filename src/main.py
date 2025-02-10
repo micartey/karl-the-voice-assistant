@@ -7,7 +7,6 @@ import src.config as config
 from src.audio.play import play_mp3, play_wav
 from src.audio.record import AudioRecorder
 from src.chat.response import generate_simple_response, generate_response
-from src.parser.prompt import Prompt
 from src.voice.wake_word import listen_for_wake_word
 from src.voice.request import record_audio_sample
 from src.voice.synthesize import text_to_speech
@@ -16,13 +15,12 @@ from src.voice.transcription import transcripe_audio_file
 # Configure input device
 AudioRecorder.select_input_device()
 
-# Read System Role Prompt and Voice Data
-prompt = Prompt.load_from_json(config.ROLE)
-logger.debug(prompt)
+# Debug role
+logger.debug(config.ROLE)
 
-voice = prompt.voice
+voice = config.VOICE
 messages = [
-    {"role": "system", "content": prompt.role},
+    {"role": "system", "content": config.ROLE},
 ]
 
 def on_signal():
@@ -43,18 +41,24 @@ def on_signal():
         # TODO: Play abort sound
         return
 
-    respond_with_audio(transcription)
+    # Respond to the transcription of the user
+    # TLDR: Answer
+    respond_with_audio(transcription, history=messages)
 
 
-def respond_with_audio(transcription: str) -> None:
+def respond_with_audio(transcription: str, history) -> None:
     # Append request to message history
-    messages.append({"role": "user", "content": transcription})
+    history.append({"role": "user", "content": transcription})
 
-    gpt_response = generate_response(messages)
+    gpt_response = generate_response(history)
+    if gpt_response is None:
+        logger.debug("Answer has been suppressed")
+        return
+
     logger.debug(gpt_response)
 
     # Append answer to message history
-    messages.append({"role": "assistant", "content": gpt_response})
+    history.append({"role": "assistant", "content": gpt_response})
 
     # Generate audio file and play it
     response_file = text_to_speech(gpt_response, voice)

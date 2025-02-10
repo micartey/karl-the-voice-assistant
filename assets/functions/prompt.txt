@@ -1,4 +1,4 @@
-Turn the following yaml into a fitting functions json for you to handle later.
+Turn the following yaml into a fitting functions json for you to handle later without the use of code blocks.
 Don't say anything, just generate the json. For context, your JSON may look as follows.
 Take a good look at what are possible keys and what key is where.
 Make sure there is no topic in the function object.

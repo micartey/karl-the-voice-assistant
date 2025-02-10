@@ -18,13 +18,10 @@ functions = json.loads(
                 "content": open("functions.yml", "r").read(),
             },
         ],
-    )
-    .choices[0]
-    .message.content
+    ).choices[0].message.content
 )
 
-
-def generate_response(messages: list[dict[str, str]]) -> str:
+def generate_response(messages: list[dict[str, str]]) -> str | None:
     """
     Generate a GPT response with function calling
     :return: text
@@ -49,6 +46,9 @@ def generate_response(messages: list[dict[str, str]]) -> str:
 
         messages.append(message)
         messages.append({"role": "function", "name": name, "content": arguments})
+
+        # Let the functions handle the response
+        return None
 
     return generate_simple_response(messages)
 
