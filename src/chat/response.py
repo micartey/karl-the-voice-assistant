@@ -15,16 +15,13 @@ functions = json.loads(
             },
             {
                 "role": "user",
-                "content": open("assets/functions/functions.yml", "r").read(),
+                "content": open("functions.yml", "r").read(),
             },
         ],
-    )
-    .choices[0]
-    .message.content
+    ).choices[0].message.content
 )
 
-
-def generate_response(messages: list[dict[str, str]]) -> str:
+def generate_response(messages: list[dict[str, str]]) -> str | None:
     """
     Generate a GPT response with function calling
     :return: text
@@ -44,10 +41,14 @@ def generate_response(messages: list[dict[str, str]]) -> str:
         name = function_call.name
         arguments = function_call.arguments
 
+        # Actual function call - Return value?
         ee.emit(name, arguments)
 
         messages.append(message)
         messages.append({"role": "function", "name": name, "content": arguments})
+
+        # Let the functions handle the response
+        return None
 
     return generate_simple_response(messages)
 

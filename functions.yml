@@ -1,0 +1,19 @@
+functions:
+  timer:
+    topic: "timer"
+    description: "Set an timer in seconds or minutes. Only use this if time is relative and not absolut"
+    parameters:
+      - parameter:
+          name: "seconds"
+          required: true
+
+  alarm:
+    topic: "alarm"
+    description: "Set an alarm for a specific time in HH:MM 24-hour format ONLY if given all information (hour and minutes)"
+    parameters:
+      - parameter:
+          name: "hour"
+          required: true
+      - parameter:
+          name: "minute"
+          required: true

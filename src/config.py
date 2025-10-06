@@ -22,11 +22,12 @@ logger.add("logs/log_{time}.log", rotation="10 MB", serialize=True)
 # Environment variables
 #
 OPENAI_API_TOKEN = os.getenv("OPENAI_API_TOKEN")
-PICOVOICE_API_TOKEN = os.getenv("PICOVOICE_API_TOKEN")
 
 WAKE_WORD_FILE = os.getenv("WAKE_WORD_FILE")
 GPT_MODEL = os.getenv("GPT_MODEL")
+
 ROLE = os.getenv("ROLE")
+VOICE = os.getenv("VOICE")
 
 AMBIENT_NOISE_LEVEL = os.getenv("AMBIENT_NOISE_LEVEL")
 SAMPLE_RATE = os.getenv("SAMPLE_RATE")
