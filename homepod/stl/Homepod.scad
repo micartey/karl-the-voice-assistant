@@ -1,5 +1,3 @@
-include <./Winkel.scad>
-
 $fn = 50;
 
 
@@ -67,6 +65,7 @@ module homepod_bottom() {
                  */
                 
                 // Power PCB
+                /*
                 intersection() {
                     inner_homepod();
                     
@@ -75,6 +74,7 @@ module homepod_bottom() {
                     rotate([-90, 0, 0])
                     cube([100, 90, 10], center = true);
                 }
+                */
                 
                 // Sound Card PCB
                 intersection() {
@@ -86,40 +86,20 @@ module homepod_bottom() {
                     cube([100, 90, 10], center = true);
                 }
                 
-                // Pi Support
+                
+                // Pi Holder
                 intersection() {
                     inner_homepod();
                     
-                    translate([-3, 0, 0])
-                    difference() {
-                        winkel_breite = 60;
-                        translate([15, 0, 0])
-                        translate([-winkel_breite / 2, 70, 40])
-                        rotate([0, 90, -90])
-                        winkel(
-                          seite_a = [50, 6, 1],
-                          seite_b = [100, 0, 5],
-                          breite  = winkel_breite,
-                          dicke   = 5
-                        );
-                        
-                        // USB-C Cutout
-                        rotate([0, 0, 90])
-                        translate([40, 25, 24])
-                        cube([15, 300, 20], center = true);
-                        
-                        // USB-A Coutout
-                        translate([15, 0, 28])
-                        cube([50, 130, 20], center = true);
-                    }
-                }    
-                
+                    translate([-14, -25, 38])
+                    cube([56.3, 100, 3]);
+                }
             }
             
             // micro
             translate([0, -width / 2 + 20, 20])
             rotate([110, 0, 0])
-            cylinder(20, r = 3.5);
+            cylinder(20, d = 7.53);
             
             // Charing port
             rotate([90, 0, 0])
@@ -129,8 +109,8 @@ module homepod_bottom() {
             // Air ventilation
             for (x = [-2:6])
                 rotate([0, -8, 360 / 10 * x + 15])
-                translate([57 + thickness, 0, 0])
-                cube([3, thickness * 3, 15]);
+                translate([57 + thickness, 0, -5])
+                cube([3, thickness * 3, 25]);
         }
         
         // Cut top 30 % off
@@ -142,13 +122,7 @@ module homepod_bottom() {
     }
 }
 
-//scale([1.01, 1.01, 1])
-//homepod_bottom();
-//scale([.99, .99, 1])
-//homepod_bottom();
-
-
-thickness = 5;
+thickness = 3;
 
 module top_half() {
     difference() {
@@ -190,7 +164,10 @@ module top_half() {
         }
             
         // Cut bottom
-        import_stl("Homepod_bottom_cutout.stl");
+        //import_stl("Homepod_bottom.stl");
+      
+        homepod_bottom();
+        
         cube([width, width, 100], center = true);
         
         // Cut top
@@ -200,22 +177,26 @@ module top_half() {
         translate([0, 0, height + 30])
         cylinder(r = width / 2 - 1.5, h = height, center = true);    
         
-        translate([-60, 0, 76])
-        cube(40, center = true);
         
+        translate([70, 0, height - 60])
+        cube([10, 7, 50], center = true);
         
-        // Camera
-        translate([60, 0, 62])
-        cube([15, 20, 5], center = true);
+        translate([70, 0, height - 63])
+        rotate([0, 20, 0])
+        cube([10, 7, 120], center = true);
         
-        translate([65, 0, 74])
-        cube([5, 20, 20], center = true);
-        
-        // Cable channel
-        translate([0, -(-width / 2 + thickness + 2), height / 2])
-        cylinder(r = 5, h = height, center = true);
+        for (y = [0:2])
+            translate([0, 0, 105 + y * 5])
+            for (x = [1,2,3,6,7,8])
+                rotate([0, 0, 360 / 10 * x + 15])
+                translate([50 + thickness, 0, -50])
+                rotate([0, 40, 0])
+                cube([5, thickness * 3, 50]);
     }    
 }
+
+
+// homepod_bottom();
 
 top_half();
 
